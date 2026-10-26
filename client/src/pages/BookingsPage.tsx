@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { bookingService, leadService, propertyService } from '../services/dataService';
 import { useAuth } from '../context/AuthContext';
 import { Booking, Lead, Unit, formatCurrency, formatDate } from '../types';
-import { MdBookmarkAdded, MdAdd, MdCheckCircle, MdCancel, MdApartment, MdPerson } from 'react-icons/md';
+import { MdAdd, MdCheckCircle, MdCancel, MdApartment } from 'react-icons/md';
 import { Pagination } from '../components/Pagination';
 
 const LIMIT = 10;

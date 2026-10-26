@@ -7,9 +7,6 @@ import {
   MdAdd,
   MdCheckCircle,
   MdBlock,
-  MdPerson,
-  MdEmail,
-  MdPhone
 } from 'react-icons/md';
 
 export const UsersPage: React.FC = () => {

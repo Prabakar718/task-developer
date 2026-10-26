@@ -12,7 +12,7 @@ import {
   UNIT_STATUS_COLORS,
   formatCurrency
 } from '../types';
-import { MdApartment, MdAdd, MdSearch, MdLocationOn, MdBookmarkAdded, MdFilterList, MdSquareFoot, MdLayers } from 'react-icons/md';
+import { MdApartment, MdAdd, MdLocationOn, MdBookmarkAdded, MdFilterList, MdSquareFoot, MdLayers } from 'react-icons/md';
 
 const PROJECT_IMAGES = [
   'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80',
@@ -45,7 +45,6 @@ export const PropertiesPage: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string>('');
   const [units, setUnits] = useState<Unit[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [unitsPage, setUnitsPage] = useState(1);
   const [totalUnitsCount, setTotalUnitsCount] = useState(0);
   const unitsTotalPages = Math.ceil(totalUnitsCount / UNITS_LIMIT);
@@ -53,7 +52,6 @@ export const PropertiesPage: React.FC = () => {
   // Filters
   const [statusFilter, setStatusFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
-  const [searchProject, setSearchProject] = useState('');
 
   // Modals
   const [showProjectModal, setShowProjectModal] = useState(false);
@@ -77,17 +75,15 @@ export const PropertiesPage: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await propertyService.listProjects(searchProject || undefined);
+      const res = await propertyService.listProjects();
       setProjects(res.projects);
       if (res.projects.length > 0 && !selectedProjectId) {
         setSelectedProjectId(res.projects[0].id);
       }
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to fetch projects');
-    } finally {
+    } catch {
       setLoading(false);
     }
-  }, [searchProject, selectedProjectId]);
+  }, [selectedProjectId]);
 
   const fetchUnits = useCallback(async () => {
     if (!selectedProjectId) return;

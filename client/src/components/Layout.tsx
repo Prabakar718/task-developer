@@ -4,19 +4,16 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 
 export const Layout: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(true);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className={`app-layout ${collapsed ? 'sidebar-collapsed' : 'sidebar-expanded'}`}>
+    <div className="app-layout">
       <Sidebar
-        collapsed={collapsed}
-        onToggleCollapse={() => setCollapsed(c => !c)}
-        mobileOpen={mobileOpen}
-        onMobileClose={() => setMobileOpen(false)}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
       <div className="app-main">
-        <Header onToggleSidebar={() => setMobileOpen(o => !o)} />
+        <Header onToggleSidebar={() => setSidebarOpen(o => !o)} />
         <main className="app-content">
           <Outlet />
         </main>
