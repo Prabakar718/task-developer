@@ -1,0 +1,103 @@
+@use 'variables' as *;
+
+// ─── Responsive ───────────────────────────────────────
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm { @media (min-width: $bp-sm) { @content; } }
+  @if $breakpoint == md { @media (min-width: $bp-md) { @content; } }
+  @if $breakpoint == lg { @media (min-width: $bp-lg) { @content; } }
+  @if $breakpoint == xl { @media (min-width: $bp-xl) { @content; } }
+}
+
+@mixin respond-below($breakpoint) {
+  @if $breakpoint == sm { @media (max-width: ($bp-sm - 1px)) { @content; } }
+  @if $breakpoint == md { @media (max-width: ($bp-md - 1px)) { @content; } }
+  @if $breakpoint == lg { @media (max-width: ($bp-lg - 1px)) { @content; } }
+}
+
+// ─── Cards with 14–16px Radius & Clean Border ─────────
+@mixin card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: $radius-lg;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.12), 0 1px 0 rgba(255,255,255,0.8) inset;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: box-shadow $transition-base, border-color $transition-base, transform $transition-base;
+}
+
+@mixin card-hover {
+  &:hover {
+    border-color: rgba($teal, 0.35);
+    box-shadow: $shadow-hover;
+    transform: translateY(-2px);
+  }
+}
+
+// ─── Glass Header ─────────────────────────────────────
+@mixin glass-header {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+// ─── Truncate ─────────────────────────────────────────
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ─── Scrollbar ────────────────────────────────────────
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(203, 213, 225, 0.8);
+    border-radius: 3px;
+    &:hover {
+      background: #94A3B8;
+    }
+  }
+}
+
+// ─── Modern Badge ─────────────────────────────────────
+@mixin badge($bg, $color) {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: $radius-full;
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: $bg;
+  color: $color;
+}
+
+// ─── Primary Gradient Action Button ───────────────────
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border: 1px solid transparent;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}

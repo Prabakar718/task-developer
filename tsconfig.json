@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "./server",
+    "paths": {
+      "@prisma/client": ["node_modules/@prisma/client"],
+      ".prisma/client": ["node_modules/.prisma/client"],
+      ".prisma/client/*": ["node_modules/.prisma/client/*"]
+    }
+  },
+  "references": [
+    { "path": "./server" },
+    { "path": "./client" }
+  ]
+}

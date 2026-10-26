@@ -1,0 +1,338 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+@keyframes db-kpi-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.db-page {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+// ── KPI Banner: teal gradient wrapper, white cards inside ──
+.db-kpi-banner {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: $spacing-base;
+  background: linear-gradient(135deg, #3DD9C0 0%, #2BC4AB 35%, #17A898 65%, #0D9488 100%);
+  border-radius: $radius-xl;
+  padding: $spacing-lg;
+  box-shadow: 0 8px 32px rgba(13,148,136,0.4);
+
+  @include respond-below(lg) { grid-template-columns: repeat(3, 1fr); }
+  @include respond-below(md) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.db-kpi-card {
+  background: rgba(255,255,255,0.93);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: $radius-lg;
+  padding: $spacing-base $spacing-lg;
+  animation: db-kpi-in 0.45s cubic-bezier(0.34,1.56,0.64,1) both;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:nth-child(1) { animation-delay: 60ms; }
+  &:nth-child(2) { animation-delay: 120ms; }
+  &:nth-child(3) { animation-delay: 180ms; }
+  &:nth-child(4) { animation-delay: 240ms; }
+  &:nth-child(5) { animation-delay: 300ms; }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.13);
+  }
+}
+
+.db-kpi-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.db-kpi-icon { font-size: 1.35rem; line-height: 1; }
+
+.db-kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: $radius-full;
+
+  &.up   { background: rgba(16,185,129,0.15); color: #059669; }
+  &.down { background: rgba(239,68,68,0.12);  color: #DC2626; }
+}
+
+.db-kpi-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 3px;
+}
+
+.db-kpi-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+// ── Row 2 & 3 layouts ──
+.db-row2 {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: $spacing-base;
+  @include respond-below(lg) { grid-template-columns: 1fr; }
+}
+
+.db-row3 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: $spacing-base;
+  @include respond-below(lg) { grid-template-columns: 1fr 1fr; }
+  @include respond-below(md) { grid-template-columns: 1fr; }
+}
+
+// ── Shared glass card ──
+.db-white-card {
+  background: rgba(15,23,42,0.72);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: $radius-xl;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.db-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-base $spacing-lg;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.db-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  color: #F1F5F9;
+}
+
+.db-card-sub { font-size: 0.72rem; color: #64748B; }
+
+.db-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: $teal;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: color $transition-fast;
+  &:hover { color: $teal-hover; }
+}
+
+// ── Property card ──
+.db-property-card {
+  background: rgba(15,23,42,0.72);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: $radius-xl;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.db-property-img {
+  position: relative;
+  height: 160px;
+  background: linear-gradient(135deg, #0F2744 0%, #0D3B5E 50%, #0A2540 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.db-property-img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.db-property-badge {
+  position: absolute;
+  bottom: $spacing-sm;
+  left: $spacing-sm;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(13,148,136,0.85);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: $radius-full;
+  backdrop-filter: blur(8px);
+}
+
+.db-property-open {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  width: 30px;
+  height: 30px;
+  border-radius: $radius-md;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background $transition-fast;
+  &:hover { background: rgba(255,255,255,0.28); }
+}
+
+.db-property-info {
+  padding: $spacing-base $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-base;
+}
+
+.db-property-name { font-size: $font-size-base; font-weight: 700; color: #F1F5F9; }
+.db-property-type { font-size: 0.72rem; color: #64748B; margin-top: 2px; }
+.db-property-stats { display: flex; gap: $spacing-lg; }
+
+.db-prop-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  strong { font-size: 1.2rem; font-weight: 800; color: $teal; line-height: 1; }
+  span   { font-size: 0.68rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+}
+
+// ── Pipeline ──
+.db-pipeline-list {
+  padding: $spacing-base $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  flex: 1;
+}
+
+.db-pipeline-row { animation: row-in 0.25s ease both; }
+
+.db-pipeline-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+.db-pipeline-dot  { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.db-pipeline-name { flex: 1; font-size: 0.78rem; font-weight: 600; color: #CBD5E1; }
+.db-pipeline-count { font-size: 0.75rem; font-weight: 700; color: #F1F5F9; }
+
+.db-pipeline-bar-track {
+  height: 6px;
+  background: rgba(255,255,255,0.07);
+  border-radius: $radius-full;
+  overflow: hidden;
+}
+.db-pipeline-bar-fill {
+  height: 100%;
+  border-radius: $radius-full;
+  transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1);
+  min-width: 4px;
+}
+
+// ── Contacts ──
+.db-contacts-list { padding: $spacing-xs $spacing-base; display: flex; flex-direction: column; flex: 1; }
+
+.db-contact-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 0.6rem $spacing-sm;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: background $transition-fast;
+  animation: row-in 0.25s ease both;
+  &:hover { background: rgba(255,255,255,0.05); }
+}
+
+.db-contact-avatar {
+  width: 34px; height: 34px;
+  border-radius: $radius-full;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+
+.db-contact-info  { flex: 1; min-width: 0; }
+.db-contact-name  { font-size: 0.8rem; font-weight: 600; color: #F1F5F9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.db-contact-sub   { font-size: 0.68rem; color: #64748B; }
+.db-contact-right { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
+
+// ── Reminders ──
+.db-reminders-list { padding: $spacing-xs $spacing-base; display: flex; flex-direction: column; flex: 1; }
+
+.db-reminder-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: 0.65rem $spacing-sm;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: background $transition-fast;
+  animation: row-in 0.25s ease both;
+  &:hover { background: rgba(255,255,255,0.05); }
+  &.highlight { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); margin-bottom: 4px; }
+}
+
+.db-reminder-left  { flex: 1; min-width: 0; }
+.db-reminder-title { font-size: 0.8rem; font-weight: 600; color: #F1F5F9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.db-reminder-sub   { font-size: 0.68rem; color: #64748B; margin-top: 2px; }
+
+.db-reminder-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex: 1; padding: $spacing-xl; text-align: center;
+  p { font-size: 0.78rem; color: #64748B; }
+}
+
+// ── Conversion ring ──
+.db-conv-ring-wrap { position: relative; width: 90px; height: 90px; margin: $spacing-base auto $spacing-sm; }
+.db-conv-svg       { width: 90px; height: 90px; transform: rotate(-90deg); }
+.db-conv-track     { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; }
+.db-conv-fill      { fill: none; stroke: $teal; stroke-width: 9; stroke-linecap: round; filter: drop-shadow(0 0 5px rgba(13,148,136,0.6)); transition: stroke-dasharray 1s cubic-bezier(0.34,1.56,0.64,1); }
+.db-conv-label     { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.db-conv-val       { font-size: 1.1rem; font-weight: 800; color: #fff; line-height: 1; }
+.db-conv-txt       { font-size: 0.58rem; color: rgba(148,163,184,0.8); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+
+// ── Recent bookings ──
+.db-bookings-list { padding: 0 $spacing-base $spacing-base; display: flex; flex-direction: column; gap: 6px; }
+
+.db-booking-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 0.5rem $spacing-sm;
+  border-radius: $radius-md;
+  transition: background $transition-fast;
+  animation: row-in 0.25s ease both;
+  &:hover { background: rgba(255,255,255,0.05); }
+}
