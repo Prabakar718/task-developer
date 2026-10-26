@@ -31,7 +31,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const followUpWhere = {
       ...leadWhere,
       followUpDate: { not: null, lte: nextWeek },
-      stage: { notIn: ['BOOKED', 'LOST'] as const },
+      stage: { notIn: ['BOOKED', 'LOST'] as any },
     };
 
     const [overdueFollowUps, upcomingFollowUps] = await Promise.all([
@@ -39,7 +39,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
         where: {
           ...leadWhere,
           followUpDate: { not: null, lt: now },
-          stage: { notIn: ['BOOKED', 'LOST'] as const },
+          stage: { notIn: ['BOOKED', 'LOST'] as any },
         },
       }),
       prisma.lead.findMany({

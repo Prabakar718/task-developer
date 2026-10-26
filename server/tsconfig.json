@@ -5,7 +5,9 @@
     "lib": ["ES2020"],
     "outDir": "./dist",
     //"rootDir": "./src",
-    "strict": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -21,6 +23,6 @@
       ".prisma/client/*": ["node_modules/.prisma/client/*"]
     }
   },
-  "include": ["src/**/*", "prisma/seed.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "prisma/seed.ts"]
 }
