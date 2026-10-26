@@ -44,6 +44,14 @@ process.on('SIGTERM', async () => {
 // Auto-seed initial users & project if database is empty
 async function ensureSeedData() {
   try {
+    // Run pending migrations first (critical for fresh Render deployments)
+    const { execSync } = require('child_process');
+    try {
+      execSync('npx prisma migrate deploy', { stdio: 'inherit', cwd: __dirname + '/..' });
+    } catch (migrateErr) {
+      console.error('Migration error:', migrateErr);
+    }
+
     const userCount = await prisma.user.count();
     if (userCount === 0) {
       console.log('🌱 Empty database detected. Auto-seeding initial users and inventory...');
