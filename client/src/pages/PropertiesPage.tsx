@@ -74,13 +74,14 @@ export const PropertiesPage: React.FC = () => {
   const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
-      setError(null);
       const res = await propertyService.listProjects();
       setProjects(res.projects);
       if (res.projects.length > 0 && !selectedProjectId) {
         setSelectedProjectId(res.projects[0].id);
       }
     } catch {
+      // ignore
+    } finally {
       setLoading(false);
     }
   }, [selectedProjectId]);
